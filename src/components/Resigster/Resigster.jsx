@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod/src/zod.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-
+import { motion } from "framer-motion";
 
 
 
@@ -82,9 +82,13 @@ export default function Register() {
       </Helmet>
 
       <div className="flex justify-center items-center">
-      <form
+      <motion.form
+       initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
         onSubmit={handleSubmit(handleRegister)}
-        className="flex text-black w-full max-w-xl flex-col gap-4 p-6 shadow-lg rounded-lg"
+         className="flex w-full max-w-md flex-col gap-5 p-8 rounded-2xl shadow-2xl
+                     backdrop-blur-xl bg-white/10 border border-white/20 text-white"
       >
         {apiError && (
           <h1 className="text-center bg-red-500 text-white rounded-md my-2 p-3 font-bold">
@@ -163,7 +167,7 @@ export default function Register() {
         </div>
 
         <Button disabled = {isloading} type="submit">{isloading ? <i className='fas fa-spinner fa-spin'></i> :'submit'}</Button>
-      </form>
+       </motion.form>
     </div>
 
 

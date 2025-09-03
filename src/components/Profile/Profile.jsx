@@ -5,6 +5,7 @@ import UserPosts from './../userposts/userposts'
 import ChangePassword from './../ChangePassword/ChangePassword'
 import UploadProfilePhoto from '../uploadProfilePhoto/uploadProfilePhoto'
 import { Helmet } from 'react-helmet'
+import CreatePost from '../CreatePost/CreatePost'
 
 export default function Profile() {
   function getUserData() {
@@ -69,6 +70,8 @@ export default function Profile() {
           <UploadProfilePhoto />
         </div>
       </div>
+
+      <CreatePost/>
 
       {data?._id && <UserPosts id={data._id} />}
     </>

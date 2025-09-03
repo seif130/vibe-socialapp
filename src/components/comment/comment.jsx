@@ -30,9 +30,13 @@ export default function Comment({comment , currentUserId}) {
       <div className=' flex gap-3'>
        
           
-  
-      <UpdateComent id={_id} oldContent={content} />
-      <DeleteComent id={_id} />
+   {(commentCreator._id === currentUserId || commentCreator.id === currentUserId) && (
+  <div className='flex gap-3'>
+    <UpdateComent id={_id} oldContent={content} />
+    <DeleteComent id={_id} />
+  </div>
+)}
+
     
 
           

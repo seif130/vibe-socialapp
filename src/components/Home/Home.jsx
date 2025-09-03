@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-
 import { PostContext } from '../../Context/PostContext'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
@@ -8,11 +7,14 @@ import { Link } from 'react-router-dom';
 import CreateComment from './../CreateComment/CreateComment';
 import CreatePost from './../CreatePost/CreatePost';
 import { Helmet } from 'react-helmet'
-
+import { UserContext } from "../../Context/CounterContext"; 
 
 
 export default function Home() {
 
+  
+
+const { userlogin } = useContext(UserContext); 
   // let {getallposts} = useContext(PostContext);
   // const [posts, setposts] = useState([]);
 
@@ -94,19 +96,40 @@ if (isLoading){
 
     <div className='flex justify-between mb-4 items-center '>
       <div className='flex items-center gap-4'>
-        <img src={post.user.photo} alt="" className=' size-[36px]' />
+        <img src={post.user.photo} alt="pic" className=' size-[36px] rounded-2xl' />
         <p>{post.user.name}</p>
         </div>
-      <div className='text-xs text-slate-500'>
+      <div className='text-xs text-slate-700'>
         {post.createdAt}
       </div>
     </div>
   {post.body &&  <h2 className='mb-4'>{post.body}</h2>}
   {post.image && <img src={post.image} alt={post.body} className='w-full rounded-md' />}
 
-    <Comment comment={post.comments[0]}  />
+   
 
      </Link>
+     <div className="flex justify-around items-center border-t border-gray-300 mt-4 pt-2 text-gray-800 text-sm mb-4">
+  
+  <button className="flex items-center gap-2 hover:text-blue-700 transition cursor-pointer">
+    <i className="fas fa-thumbs-up"></i>
+    <span>Like</span>
+  </button>
+
+
+  <button className="flex items-center gap-2 hover:text-green-500 transition cursor-pointer">
+    <i className="fas fa-comment"></i>
+    <span>Comment</span>
+  </button>
+
+  <button className="flex items-center gap-2 hover:text-purple-600 transition cursor-pointer">
+    <i className="fas fa-share"></i>
+    <span>Share</span>
+  </button>
+</div>
+
+{post.comments.length > 0 && <Comment currentUserId={userlogin?.id}  comment={post.comments[0]} />}
+
    <CreateComment postid={post.id}/>
     
   </div>
